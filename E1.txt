@@ -1,0 +1,35 @@
+Aim: Introduction to the Node.js and its installation to print Hello World
+
+Software Used: OS: Ubuntu, Node.js, npm.
+
+Theory:
+Node.js (Node) is an open source, cross-platform runtime environment for executing JavaScript code. Node is used extensively for server-side programming, making it possible for developers to use JavaScript for client-side and server-side code without needing to learn an additional language. Node is sometimes referred to as a programming language or software development framework, but neither is true; it is strictly a JavaScript runtime.
+
+To install Node.js on ubuntu.
+1. Open the ‘Terminal’.
+2. Type the command sudo apt install nodejs (Hit the Enter)
+3. To check the installed version of nodejs, type the command 
+node –v (Hit the Enter)
+
+To install npm
+1. Open the ’Terminal’
+2. Type the command sudo apt install npm (Hit the Enter)
+3. To check the installed version of npm, type the command 
+npm –v (Hit the Enter)
+
+To start the Node.js
+1. Open the ‘Terminal’.
+2. Type node (Hit the Enter)
+
+To write and execute the first program on Node.js
+1. Create a text file. Save it with the name P1.js
+
+2. Type the following code-
+console.log(“Hello World”);
+
+3. To run the program, open the ‘Terminal’.
+4. Change the path to the current folder.
+5. Type the command node P1.js (Hit the Enter)
+
+Conclusion: Thus we have completed the installation of Nodejs while printing the output.
+

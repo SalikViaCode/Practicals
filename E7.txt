@@ -1,0 +1,78 @@
+Aim: To demonstrate the creation of database and table in MySQL using Node.js
+
+Software used: OS: Ubuntu, Nodejs, npm.
+
+Theory: 
+
+Instructions to execute the program: To install it using npm write the below command 
+npm install mysql2
+
+Program:
+// Import the mysql2 package
+const mysql = require('mysql2');
+
+// Create a connection to the MySQL server
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'abc123'
+});
+
+// Connect to the MySQL server
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to the database:', err);
+    return;
+  }
+  console.log('Connected to the MySQL server.');
+  
+  // Create a new database
+  connection.query('CREATE DATABASE IF NOT EXISTS my_database', (err, results) => {
+    if (err) {
+      console.error('Error creating database:', err);
+      return;
+    }
+    console.log('Database created or already exists.');
+
+    // Use the new database
+    connection.query('USE my_database', (err) => {
+      if (err) {
+        console.error('Error selecting database:', err);
+        return;
+      }
+      
+      // Create a new table
+      const createTableQuery = `
+        CREATE TABLE IF NOT EXISTS users (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          name VARCHAR(100) NOT NULL,
+          email VARCHAR(100) UNIQUE NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )`;
+      
+      connection.query(createTableQuery, (err, results) => {
+        if (err) {
+          console.error('Error creating table:', err);
+          return;
+        }
+        console.log('Table created or already exists.');
+        
+        // Close the connection
+	// connection.end();
+        connection.end((err) => {
+          if (err) {
+            console.error('Error closing the connection:', err);
+            return; 
+          }
+          console.log('Connection closed.');
+        });
+      });
+    });
+  });
+});
+
+
+Output:
+SHOW database_name;
+USE database_name;
+SHOW tables;

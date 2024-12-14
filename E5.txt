@@ -1,0 +1,49 @@
+Aim: To study event handling in Node.js and demonstrate it using the event module and Event Emitter object.
+
+Software used: OS: Ubuntu, Nodejs, npm.
+
+Theory: 
+
+
+Program:
+// Import the EventEmitter class from the 'events' module
+const EventEmitter = require('events');
+
+// Create an instance of EventEmitter
+const eventEmitter = new EventEmitter();
+
+// Define an event listener for the 'greet' event
+eventEmitter.on('greet', () => {
+  console.log('Hello! Someone greeted.');
+});
+
+// Define another event listener for the 'greet' event
+eventEmitter.on('greet', () => {
+  console.log('Greeting received!');
+});
+
+// Define an event listener for the 'farewell' event
+eventEmitter.on('farewell', () => {
+  console.log('Goodbye! Someone said farewell.');
+});
+
+// Emit the 'greet' event
+console.log('Emitting the "greet" event...');
+eventEmitter.emit('greet');
+
+// Emit the 'farewell' event
+console.log('Emitting the "farewell" event...');
+eventEmitter.emit('farewell');
+
+// Define an event listener for a custom event with parameters
+eventEmitter.on('customEvent', (param1, param2) => {
+  console.log(`Custom event received with parameters: ${param1} and ${param2}`);
+});
+
+// Emit the 'customEvent' with parameters
+console.log('Emitting the "customEvent" with parameters...');
+eventEmitter.emit('customEvent', 'abc', 'xyz');
+
+
+
+Output:

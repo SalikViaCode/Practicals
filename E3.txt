@@ -1,0 +1,37 @@
+Aim: Create a nodejs program that reads a text file, modifies its content, and writes the modified content back to the file.
+
+Software used: OS: Ubuntu, Nodejs, npm.
+
+Theory:
+
+Program:
+const fs = require('fs');
+const filePath = 'example.txt';
+const targetWord = 'oldword';
+const replacementWord = 'newword';
+// Read the content of the file
+fs.readFile(filePath, 'utf8', (err, data) => {
+if (err) {
+console.error('Error reading file:', err);
+return;
+}
+// Modify the content by replacing the target word with the replacement word
+const modifiedContent = data.replace(new RegExp(targetWord, 'g'),
+replacementWord);
+// Write the modified content back to the file
+fs.writeFile(filePath, modifiedContent, 'utf8', (err) => {
+if (err) {
+console.error('Error writing file:', err);
+return;
+}
+console.log('File content modified and saved successfully.');
+});
+});
+
+How to run :
+Replace 'example.txt' with the path to the text file you want to modify.
+Replace 'oldword' with the word you want to replace, and 'newword' with the replacement word.
+This program uses the fs module to read and write files asynchronously in Node.js.
+Make sure to have the target file in the same directory as your program or provide the correct path.
+
+Output:

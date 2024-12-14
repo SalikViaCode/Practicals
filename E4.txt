@@ -1,0 +1,53 @@
+Aim: To study the URL module of the Node.js and write a program that opens the requested file and returns the content of the file to the client. If anything goes wrong, throw a 404 error.
+
+Software used: OS: Ubuntu, Nodejs, npm.
+
+Theory: (This is sample theory. Do add the theory) 
+
+http.createServer: Creates an HTTP server that listens for incoming requests.
+url.parse: Parses the URL of the incoming request to extract the pathname.
+path.join: Ensures that the path to the file is correctly formatted, regardless of the operating system.
+fs.readFile: Reads the content of the file asynchronously. If the file is found, it sends the content; otherwise, it sends a 404 error.
+
+
+
+
+Program:
+// Import required modules
+const http = require('http');
+const url = require('url');
+const fs = require('fs');
+const path = require('path');
+
+// Create an HTTP server
+const server = http.createServer((req, res) => {
+  // Parse the URL to get the requested path
+  const parsedUrl = url.parse(req.url);
+  const pathname = `.${parsedUrl.pathname}`;
+
+  // Determine the file path
+  const filePath = path.join(__dirname, pathname);
+
+  // Read the requested file
+  fs.readFile(filePath, (err, data) => {
+    if (err) {
+      // If there is an error (e.g., file not found), send a 404 response
+      res.statusCode = 404;
+      res.setHeader('Content-Type', 'text/plain');
+      res.end('404 Not Found');
+    } else {
+      // If successful, send the file contents
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/plain');
+      res.end(data);
+    }
+  });
+});
+
+// Set the server to listen on port 3000
+server.listen(3000, () => {
+  console.log('Server is listening on port 3000');
+});
+
+
+Output:

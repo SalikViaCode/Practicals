@@ -1,0 +1,52 @@
+Aim: To install MySQL and its driver and create connection with it using Node.js.
+
+Software used: OS: Ubuntu, Nodejs, npm.
+
+Theory: 
+
+To install MySQL, run the following command from a terminal prompt:
+npm install mysql2
+
+How to change the default password - 
+$sudo cat /etc/mysql/debian.cnf
+
+
+You can find the following lines in there
+user = debian-sys-maint 
+password = password_for_the_user
+
+
+Then:
+$ mysql -u debian-sys-maint -p 
+Enter password: (type the password from debian.cnf)
+
+
+
+
+
+Program:
+const mysql = require('mysql2');
+
+// Create a connection to the database
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root', // Replace with your MySQL username
+    password: 'abc123', // Replace with your MySQL password
+    database: 'mysql' // Replace with your MySQL database name
+});
+
+// Connect to the database
+connection.connect((err) => {
+    if (err) {
+        console.error('Error connecting to MySQL:', err.stack);
+        return;
+    }
+    console.log('Connected to MySQL as id ' + connection.threadId);
+});
+
+// Close the connection
+connection.end();
+
+
+
+Output:

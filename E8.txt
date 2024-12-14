@@ -1,0 +1,74 @@
+Aim: To demonstrate the insertion of single and multiple records in the MySQL using “INSERT” statement and Node.js
+
+Software used: OS: Ubuntu, Nodejs, npm.
+
+Theory: 
+
+Instructions to execute the program: To install it using npm write the below command 
+npm install mysql2
+
+Program:
+// Import the mysql2 package
+const mysql = require('mysql2');
+
+// Create a connection to the MySQL server
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'your_password',
+  database: 'my_database' 
+});
+
+// Connect to the MySQL server
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to the database:', err);
+    return;
+  }
+  console.log('Connected to the MySQL server.');
+
+  // Insert a single record
+  const singleInsertQuery = 'INSERT INTO users (name, email) VALUES (?, ?)';
+  const singleRecord = ['John Doe', 'john.doe@example.com'];
+
+  connection.query(singleInsertQuery, singleRecord, (err, results) => {
+    if (err) {
+      console.error('Error inserting single record:', err);
+      return;
+    }
+    console.log('Single record inserted:', results);
+
+    // Insert multiple records
+    const multipleInsertQuery = 'INSERT INTO users (name, email) VALUES ?';
+    const multipleRecords = [
+      ['Alice Smith', 'alice.smith@example.com'],
+      ['Bob Johnson', 'bob.johnson@example.com'],
+      ['Carol Davis', 'carol.davis@example.com']
+    ];
+
+    connection.query(multipleInsertQuery, [multipleRecords], (err, results) => {
+      if (err) {
+        console.error('Error inserting multiple records:', err);
+        return;
+      }
+      console.log('Multiple records inserted:', results);
+
+      // Close the connection
+      connection.end((err) => {
+        if (err) {
+          console.error('Error closing the connection:', err);
+          return;
+        }
+        console.log('Connection closed.');
+      });
+    });
+  });
+});
+
+
+Output:
+SHOW DATABASES;
+USE database_name;
+SHOW TABLES;
+SELECT * FROM table_name;
+
